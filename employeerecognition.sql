@@ -21,7 +21,7 @@ ORDER BY finance_managers DESC;
 -- Get the names of the top 3 employees who work shifts at the most dealerships?
 SELECT
 	e.first_name || ' ' || e.last_name as employee,
-	COUNT(d.dealership_id) as num_of_dealerships
+	COUNT(d.dealership_id) as dealerships
 FROM employees e
 	LEFT JOIN dealershipemployees de on de.employee_id = e.employee_id
 	INNER JOIN dealerships d on d.dealership_id = de.dealership_id
@@ -31,9 +31,9 @@ ORDER BY num_of_dealerships DESC;
 -- Get a report on the top two employees who has made the most sales through leasing vehicles.
 SELECT
 	e.first_name || ' ' || e.last_name as employee,
-	COUNT(s.sale_id) as num_of_leases
+	COUNT(s.sale_id) as leases
 FROM sales s
 	INNER JOIN employees e on s.employee_id = e.employee_id
 WHERE s.sales_type_id = 2
 GROUP BY employee
-ORDER BY num_of_leases;
+ORDER BY leases;
